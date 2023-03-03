@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="scenePane" prefHeight="408.0" prefWidth="807.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainPage">
+    <children>
+      <Pane fx:id="logIn11" layoutX="30.0" layoutY="331.0" prefHeight="55.0" prefWidth="513.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
+         <children>
+            <Button layoutX="52.0" layoutY="10.0" mnemonicParsing="false" onAction="#showCreateForm" prefHeight="34.0" prefWidth="101.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Crear">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="206.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteProcess" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Eliminar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="372.0" layoutY="11.0" mnemonicParsing="false" onAction="#showEditForm" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Editar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TableView fx:id="processTable" layoutX="30.0" layoutY="66.0" prefHeight="237.0" prefWidth="513.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Text fill="WHITE" layoutX="198.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="TABLA DE PROCESOS">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Separator layoutX="559.0" layoutY="16.0" orientation="VERTICAL" prefHeight="373.0" prefWidth="0.0" />
+      <Pane fx:id="logIn111" layoutX="580.0" layoutY="69.0" prefHeight="324.0" prefWidth="204.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
+         <children>
+            <ComboBox fx:id="comboBox" layoutX="27.0" layoutY="61.0" prefWidth="150.0" />
+            <Button layoutX="57.0" layoutY="240.0" mnemonicParsing="false" onAction="#execute" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Ejecutar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Text fill="WHITE" layoutX="607.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="ALGORITMO DE PLANIFICACIÓN" wrappingWidth="150.92578125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
