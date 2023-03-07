@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="scenePane" prefHeight="486.0" prefWidth="701.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AlgorithmPage">
+    <children>
+      <TableView fx:id="processTable" layoutX="30.0" layoutY="51.0" prefHeight="237.0" prefWidth="435.0">
+        <columns>
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Nombre " />
+          <TableColumn fx:id="colRunTime" prefWidth="139.0" text="Tiempo Ejecución" />
+            <TableColumn fx:id="colWaitTime" prefWidth="109.0" text="Tiempo Espera" />
+            <TableColumn fx:id="colReturnTime" prefWidth="169.0" text="Tiempo Retorno" />
+        </columns>
+      </TableView>
+      <Text fill="WHITE" layoutX="153.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="TABLA DE PROCESOS">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Pane fx:id="logIn111" layoutX="483.0" layoutY="51.0" prefHeight="237.0" prefWidth="204.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
+         <children>
+            <Button layoutX="57.0" layoutY="189.0" mnemonicParsing="false" onAction="#exit" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Salir">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="57.0" layoutY="141.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Volver">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="tfAverageWaitTime" layoutX="28.0" layoutY="14.0" />
+            <TextField fx:id="tfAverageReturnTime" layoutX="27.0" layoutY="80.0" />
+            <Text fill="WHITE" layoutX="24.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Promedio Tiempo Espera" wrappingWidth="155.92578125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="20.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Promedio Tiempo Retorno" wrappingWidth="164.92578125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text fill="WHITE" layoutX="528.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="PROMEDIOS" wrappingWidth="113.92578125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="309.0" prefHeight="2.0" prefWidth="671.0" />
+      <Text fill="WHITE" layoutX="30.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="DIAGRAMA DE GANTT" wrappingWidth="217.326171875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
