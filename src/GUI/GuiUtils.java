@@ -13,20 +13,6 @@ public class GuiUtils {
     public static double mouseX, mouseY;
     private static Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-    public static Scene loadSceneFrom(String fxmlName){
-        try{
-            FXMLLoader loader = new FXMLLoader(GuiUtils.class.getResource("./" + fxmlName + ".fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            scene.setFill(Color.TRANSPARENT);
-            return scene;
-        }catch (Exception e){
-            System.out.println("Scene Loading Error");
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static Scene loadSceneFrom(String fxmlName,Object controller){
         try{
             FXMLLoader loader = new FXMLLoader(GuiUtils.class.getResource("./" + fxmlName + ".fxml"));

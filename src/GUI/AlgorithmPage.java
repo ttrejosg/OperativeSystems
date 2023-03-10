@@ -5,6 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AlgorithmPage implements Initializable{
@@ -24,11 +31,13 @@ public class AlgorithmPage implements Initializable{
     private TableColumn<Process, String> colName;
     @FXML
     private TableColumn<Process, Integer> colReturnTime, colRunTime, colWaitTime;
-    private ObservableList<Process> processes;
 
     //Averages
     @FXML
     private TextField tfAverageReturnTime, tfAverageWaitTime;
+
+    @FXML
+    private StackedBarChart<Integer, String> ganttDiagram;
 
     //Components of Window
     @FXML
@@ -41,14 +50,41 @@ public class AlgorithmPage implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Process table initialization
-        this.processes = FXCollections.observableArrayList();
         this.colName.setCellValueFactory(new PropertyValueFactory<Process, String>("name"));
         this.colRunTime.setCellValueFactory(new PropertyValueFactory<Process, Integer>("runTime"));
         this.colWaitTime.setCellValueFactory(new PropertyValueFactory<Process, Integer>("waitTime"));
         this.colReturnTime.setCellValueFactory(new PropertyValueFactory<Process, Integer>("returnTime"));
+
     }
 
     //Methods
+
+    //Method that is responsible for loading the information of the processes in the table
+    public void loadProcessInformation(ObservableList<Process> processes, double averageWaitTime, double averageReturnTime){
+        this.processTable.setItems(processes);
+        this.tfAverageWaitTime.setText(Double.toString(averageWaitTime));
+        this.tfAverageReturnTime.setText(Double.toString(averageReturnTime));
+
+        ArrayList<XYChart.Series<Integer, String>> serieses = new ArrayList<>();
+        ArrayList<Process> processesArray = new ArrayList<>(processes);
+
+        XYChart.Series<Integer, String> mainSeries = new XYChart.Series<>();
+
+        for(Process currentProcess: processesArray){
+            XYChart.Series<Integer, String> series = new XYChart.Series<>();
+            series.getData().add(new XYChart.Data<>(currentProcess.getReturnTime() - currentProcess.getWaitTime(), currentProcess.getName()));
+            mainSeries.getData().add(new XYChart.Data<>(currentProcess.getWaitTime(), currentProcess.getName()));
+            serieses.add(series);
+        }
+
+        serieses.add(0, mainSeries);
+        ganttDiagram.getData().setAll(serieses);
+        ganttDiagram.setLayoutX(1);
+
+        for(Node n:ganttDiagram.lookupAll(".default-color1.chart-bar")) {
+            n.setStyle("-fx-bar-fill: red;");
+        }
+    }
 
     //Method that is responsible for exiting the application
     @FXML
@@ -60,8 +96,13 @@ public class AlgorithmPage implements Initializable{
     // Method that is responsible for returning to the main page
     @FXML
     void goBack(ActionEvent event) {
-
+        MainPage controller = new MainPage();
+        Scene mainScene = GuiUtils.loadSceneFrom("MainPage", controller);
+        Stage stage = (Stage) scenePane.getScene().getWindow();
+        stage.setScene(mainScene);
+        GuiUtils.setDragAndDropOnStage(stage);
+        controller.loadProcessTable(this.processTable.getItems());
+        stage.show();
     }
 
 }
-

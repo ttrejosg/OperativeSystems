@@ -1,17 +1,4 @@
-.button1
-{
--fx-background-color : #393351;
--fx-background-radius :  30 0 0 30;
-}
-.button1:hover
-{
--fx-background-color : #524A7B ;
--fx-background-radius :  30 0 0 30;
-}
-.button1:pressed
-{
--fx-background-color : #2F2B43 ;
--fx-background-radius :  30 0 0 30;
+.default-color0.chart-bar { -fx-bar-fill: transparent
 }
 
 .button2
@@ -33,42 +20,12 @@
 -fx-text-fill:  rgb(250, 250, 250)
 }
 
-.button3
-{
-    -fx-background-color : #141124;
-    -fx-background-radius :  0 0 0 0;
-}
-.button3:hover
-{
-    -fx-background-color : #524A7B ;
-}
-.button3:pressed
-{
-    -fx-background-color : #2F2B43 ;
-}
-
-.button4
-{
-    -fx-background-color :linear-gradient(to top left, #41951C, #D4CEE3);
-    -fx-background-radius :  30 30 30 30;
-}
-.button4:hover
-{
-    -fx-background-color :linear-gradient(to top left, #D4CEE3, #41951C);
-    -fx-background-radius :  30 30 30 30;
-}
-.button4:pressed
-{
-    -fx-background-color :linear-gradient(to top left, #41951C, #D4CEE3);
-    -fx-background-radius :  30 30 30 30;
-}
-
 .textField
 {
-    -fx-background-color :  trasnparente;
+    -fx-background-color : transparent;
     -fx-border-color:  rgb(250, 250, 250);
     -fx-border-width:  0px 0px 2px 0px;
-    -fx-text-fill:  #FFFFFF
+    -fx-text-fill: rgb(250, 250, 250)
 
 }
 
@@ -148,17 +105,7 @@
 .chart {
     -fx-padding: 10px;
     -fx-background-color: transparent;
-    -fx-legend-visible: false;
 }
 .chart-plot-background {
     -fx-background-color:transparent;
-}
-
-.chart-pie {
-    -fx-border-color: derive(-fx-pie-color, 1%);
-    -fx-border-width: 0px;
-}
-.linear-grad
-{
-    -fx-background-color: linear-gradient(to bottom left, #A868A0, #2D75E8);
 }

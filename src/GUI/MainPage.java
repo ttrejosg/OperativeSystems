@@ -1,18 +1,14 @@
 package GUI;
+import Models.Algorithm;
 import Models.Process;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,7 +16,9 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainPage implements Initializable {
     //Components of Process Table
@@ -30,11 +28,14 @@ public class MainPage implements Initializable {
     private TableColumn<Process, String> colName;
     @FXML
     private TableColumn<Process, Integer> colRunTime;
-    private ObservableList<Process> processes;
 
-    //Algorithm selection combo-box
+    //Algorithm selection
     @FXML
     private ComboBox<String> comboBox;
+    @FXML
+    private Spinner<Integer> spinnerQuantum;
+    @FXML
+    private Text txtQuantum;
 
     //Components of the form
     @FXML
@@ -59,20 +60,24 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Process table initialization
-        this.processes = FXCollections.observableArrayList();
         this.colName.setCellValueFactory(new PropertyValueFactory<Process, String>("name"));
         this.colRunTime.setCellValueFactory(new PropertyValueFactory<Process, Integer>("runTime"));
 
         //Algorithm selection combo-box initialization
         String[] algorithms = {"Orden de llegada", "Primero el más corto", "Prioridad", "Round Robin"};
         this.comboBox.getItems().setAll(algorithms);
+
         //Form
         this.stageForm = new Stage();
+
+        //Spinner quantum
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
+        this.spinnerQuantum.setValueFactory(valueFactory);
     }
 
     //Methods
 
-    //Method that is responsible for initialize and display the create form
+    //Method that is responsible for initialize and show the create form
     private void initializeCreateForm(ActionEvent event) throws IOException {
         Scene formScene = GuiUtils.loadSceneFrom("form",this);
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
@@ -83,7 +88,7 @@ public class MainPage implements Initializable {
         this.showFormStage(formScene);
     }
 
-    //Method that is responsible for initialize and display the edit form
+    //Method that is responsible for initialize and show the edit form
     private void initializeEditForm(ActionEvent event) throws IOException {
         Scene formScene = GuiUtils.loadSceneFrom("form",this);
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
@@ -110,6 +115,7 @@ public class MainPage implements Initializable {
         else if(buttonText.contains("Editar")) this.initializeEditForm(ev);
     }
 
+    //Method that is responsible for show the stage
     private void showFormStage(Scene scene){
         this.stageForm.setScene(scene);
         this.stageForm.initStyle(StageStyle.TRANSPARENT);
@@ -127,9 +133,9 @@ public class MainPage implements Initializable {
         Process process;
         if(!name.isEmpty() && runTime != 0){
             process = new Process(name, runTime);
-            this.processes = this.processTable.getItems();
-            this.processes.add(process);
-            this.processTable.setItems(this.processes);
+            ObservableList<Process> processes = this.processTable.getItems();
+            processes.add(process);
+            this.processTable.setItems(processes);
             this.stageForm.close();
         } else GuiUtils.showMessageDialog("Crear proceso", "Todos los campos deben estar llenos");
     }
@@ -154,16 +160,70 @@ public class MainPage implements Initializable {
     private void deleteProcess(ActionEvent event) {
         Process selectedprocess = this.processTable.getSelectionModel().getSelectedItem();
         if(selectedprocess != null){
-            this.processes = this.processTable.getItems();
-            this.processes.remove(selectedprocess);
-            this.processTable.setItems(this.processes);
+            ObservableList<Process> processes = this.processTable.getItems();
+            processes.remove(selectedprocess);
+            this.processTable.setItems(processes);
         } else GuiUtils.showMessageDialog("Eliminar proceso", "Debe seleccionar un proceso a eliminar");
     }
 
-    //
+    //Method that is responsible for show the new tab and calling the methods responsible for executing the
+    //scheduling algorithm according to the selection
     @FXML
     private void execute(ActionEvent event) {
+        String selectedItem = this.comboBox.getSelectionModel().getSelectedItem();
+        ArrayList<Process> processes = new ArrayList<>(this.processTable.getItems());
 
+        if(selectedItem == null) GuiUtils.showMessageDialog("Ejecutar Algoritmo", "Debe seleccionar una de las opciones");
+        else if(selectedItem.equals("Orden de llegada")){
+            Algorithm.FCFS(processes);
+            showAlgorithmPage(processes);
+        } else if (selectedItem.equals("Primero el más corto")) {
+            Algorithm.SJF(processes);
+            showAlgorithmPage(processes);
+        } else if (selectedItem.equals("Prioridad")) {
+            //Algorithm.priority(processes);
+            showAlgorithmPage(processes);
+        } else if (selectedItem.equals("Round Robin")) {
+            int quantum = spinnerQuantum.getValue();
+            Algorithm.roundRobin(processes, quantum);
+            showAlgorithmPage(processes);
+        }
+    }
+
+    //Method that is responsible for show the Algorithm Page
+    private void showAlgorithmPage(ArrayList<Process> processes){
+        AlgorithmPage algorithmPage = new AlgorithmPage();
+        Stage stage = (Stage) scenePane.getScene().getWindow();
+        stage.setScene(GuiUtils.loadSceneFrom("AlgorithmPage", algorithmPage));
+        GuiUtils.setDragAndDropOnStage(stage);
+
+        //Calculate the averages
+        double averageWaitTime = 0;
+        int averageReturnTime = 0;
+        for(Process currentProcess: processes){
+            averageWaitTime += currentProcess.getWaitTime();
+            averageReturnTime += currentProcess.getReturnTime();
+        }
+        averageWaitTime /= processes.size();
+        averageReturnTime /= processes.size();
+
+        //Set the information in the page
+        algorithmPage.loadProcessInformation(this.processTable.getItems(), averageWaitTime, averageReturnTime);
+        stage.show();
+    }
+
+    //Method that is responsible for showing the quantum selector if the Round Robin
+    //algorithm is selected, or stop showing them if not
+    @FXML
+    void comboAction(ActionEvent event) {
+        String selectedItem = this.comboBox.getSelectionModel().getSelectedItem();
+        if(selectedItem.equals("Round Robin")){
+            this.spinnerQuantum.setVisible(true);
+            this.txtQuantum.setVisible(true);
+        }else{
+            this.spinnerQuantum.setVisible(false);
+            this.txtQuantum.setVisible(false);
+        }
     }
 
     //Method that is responsible for exiting the application
@@ -179,5 +239,8 @@ public class MainPage implements Initializable {
         stageForm.close();
     }
 
-
+    //Method that is responsible for loading the information of the processes in the table
+    public void loadProcessTable(ObservableList<Process> processes){
+        this.processTable.setItems(processes);
+    }
 }
