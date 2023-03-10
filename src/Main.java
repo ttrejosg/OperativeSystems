@@ -1,4 +1,4 @@
-import GUI.GuiUtils;
+import GUI.GuiUtil;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -8,10 +8,10 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage){
-        Scene mainPageScene = GuiUtils.loadSceneFrom("MainPage");
+        Scene mainPageScene = GuiUtil.loadSceneFrom("MainPage");
         stage.setScene(mainPageScene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        GuiUtils.setDragAndDropOnStage(stage);
+        GuiUtil.setDragAndDropOnStage(stage);
         stage.show();
     }
 

@@ -35,7 +35,9 @@ public class AlgorithmPage implements Initializable{
     private AnchorPane scenePane;
 
     //Constructor
-    public AlgorithmPage() {}
+    public AlgorithmPage() {
+
+    }
 
     //Method that is responsible for initializing the window
     @Override

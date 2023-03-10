@@ -4,15 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,6 +17,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.stage.StageStyle.TRANSPARENT;
 
 public class MainPage implements Initializable {
     //Components of Process Table
@@ -74,7 +72,7 @@ public class MainPage implements Initializable {
 
     //Method that is responsible for initialize and display the create form
     private void initializeCreateForm(ActionEvent event) throws IOException {
-        Scene formScene = GuiUtils.loadSceneFrom("form",this);
+        Scene formScene = GuiUtil.loadSceneFrom("form",this);
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
         this.inputRunTime.setValueFactory(valueFactory);
         this.tittleForm.setText("CREAR PROCESO");
@@ -85,7 +83,7 @@ public class MainPage implements Initializable {
 
     //Method that is responsible for initialize and display the edit form
     private void initializeEditForm(ActionEvent event) throws IOException {
-        Scene formScene = GuiUtils.loadSceneFrom("form",this);
+        Scene formScene = GuiUtil.loadSceneFrom("form",this);
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000);
         this.inputRunTime.setValueFactory(valueFactory);
         Process selectedprocess = this.processTable.getSelectionModel().getSelectedItem();
@@ -98,7 +96,7 @@ public class MainPage implements Initializable {
             this.showFormStage(formScene);
         }
         else {
-            GuiUtils.showMessageDialog("Editar proceso", "Debe seleccionar un proceso a editar");
+            GuiUtil.showMessageDialog("Editar proceso", "Debe seleccionar un proceso a editar");
         }
     }
 
@@ -112,8 +110,8 @@ public class MainPage implements Initializable {
 
     private void showFormStage(Scene scene){
         this.stageForm.setScene(scene);
-        this.stageForm.initStyle(StageStyle.TRANSPARENT);
-        GuiUtils.setDragAndDropOnStage(this.stageForm);
+        this.stageForm.initStyle(TRANSPARENT);
+        GuiUtil.setDragAndDropOnStage(this.stageForm);
         //Show
         this.stageForm.initModality(Modality.APPLICATION_MODAL);
         this.stageForm.showAndWait();
@@ -131,7 +129,7 @@ public class MainPage implements Initializable {
             this.processes.add(process);
             this.processTable.setItems(this.processes);
             this.stageForm.close();
-        } else GuiUtils.showMessageDialog("Crear proceso", "Todos los campos deben estar llenos");
+        } else GuiUtil.showMessageDialog("Crear proceso", "Todos los campos deben estar llenos");
     }
 
     //Method that is responsible for edit a process
@@ -146,7 +144,7 @@ public class MainPage implements Initializable {
             selectedprocess.setRunTime(runTime);
             this.processTable.refresh();
             this.stageForm.close();
-        } else GuiUtils.showMessageDialog("Editar proceso", "Todos los campos deben estar llenos");
+        } else GuiUtil.showMessageDialog("Editar proceso", "Todos los campos deben estar llenos");
     }
 
     //Method that is responsible for deleting a process
@@ -157,7 +155,7 @@ public class MainPage implements Initializable {
             this.processes = this.processTable.getItems();
             this.processes.remove(selectedprocess);
             this.processTable.setItems(this.processes);
-        } else GuiUtils.showMessageDialog("Eliminar proceso", "Debe seleccionar un proceso a eliminar");
+        } else GuiUtil.showMessageDialog("Eliminar proceso", "Debe seleccionar un proceso a eliminar");
     }
 
     //
@@ -178,6 +176,5 @@ public class MainPage implements Initializable {
     private void cancelForm(ActionEvent event) {
         stageForm.close();
     }
-
 
 }

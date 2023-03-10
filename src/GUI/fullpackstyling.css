@@ -65,10 +65,10 @@
 
 .textField
 {
-    -fx-background-color :  trasnparente;
+    -fx-background-color :  transparent;
     -fx-border-color:  rgb(250, 250, 250);
     -fx-border-width:  0px 0px 2px 0px;
-    -fx-text-fill:  #FFFFFF
+    -fx-text-fill:  #ffffff
 
 }
 
