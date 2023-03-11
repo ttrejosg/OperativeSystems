@@ -1,14 +1,16 @@
 import GUI.GuiUtil;
+import GUI.Controllers.MainPage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.stage.StageStyle;
 
-public class Main extends Application{
+public class App extends Application{
 
     @Override
     public void start(Stage stage){
-        Scene mainPageScene = GuiUtil.loadSceneFrom("MainPage");
+        MainPage mainPageCtr = new MainPage();
+        Scene mainPageScene = GuiUtil.loadSceneFrom("MainPage",mainPageCtr);
         stage.setScene(mainPageScene);
         stage.initStyle(StageStyle.TRANSPARENT);
         GuiUtil.setDragAndDropOnStage(stage);

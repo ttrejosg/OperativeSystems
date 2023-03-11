@@ -12,9 +12,10 @@ public class GuiUtil {
     public static double mouseX, mouseY;
     private static Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
+
     public static Scene loadSceneFrom(String fxmlName){
         try{
-            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./FXML/" + fxmlName + ".fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
@@ -28,7 +29,7 @@ public class GuiUtil {
 
     public static Scene loadSceneFrom(String fxmlName,Object controller) {
         try {
-            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./FXML/" + fxmlName + ".fxml"));
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);

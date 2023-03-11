@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="scenePaneForm" prefHeight="299.0" prefWidth="254.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="scenePaneForm" prefHeight="299.0" prefWidth="254.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@../Styles/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <Text fx:id="tittleForm" fill="WHITE" layoutX="51.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="CREAR PROCESO">
          <font>
@@ -18,18 +18,19 @@
       </Text>
       <Pane fx:id="logIn111" layoutX="25.0" layoutY="54.0" prefHeight="222.0" prefWidth="205.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
          <children>
-            <Button fx:id="bottonForm" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Crear">
+            <Button fx:id="bottonForm" layoutX="58.0" layoutY="125.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Crear">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="58.0" layoutY="170.0" mnemonicParsing="false" onAction="#cancelForm" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Cancelar">
+            <Button layoutX="58.0" layoutY="170.0" mnemonicParsing="false" onAction="#cancelForm" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Cancelar">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <TextField fx:id="inputName" layoutX="28.0" layoutY="14.0" promptText="Nombre*" styleClass="textField" />
-            <Spinner fx:id="inputRunTime" editable="true" layoutX="29.0" layoutY="63.0" styleClass="button2" />
+            <Spinner fx:id="inputRunTime" editable="true" layoutX="28.0" layoutY="56.0" styleClass="button2" />
+            <Spinner fx:id="inputPriority" editable="true" layoutX="28.0" layoutY="88.0" styleClass="button2" />
          </children>
       </Pane>
     </children>
