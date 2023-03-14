@@ -11,12 +11,16 @@ public class Process {
         this.name = name;
         this.runTime = runTime;
         this.priority = priority;
+        this.waitTime = 0;
+        this.returnTime = 0;
     }
 
     public Process(Process anotherProcess){
         this.name = anotherProcess.name;
         this.runTime = anotherProcess.runTime;
         this.priority = anotherProcess.priority;
+        this.waitTime = 0;
+        this.returnTime = 0;
     }
 
     public String getName() {
