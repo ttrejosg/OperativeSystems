@@ -65,12 +65,12 @@
          </font>
       </Text>
       <Separator layoutX="14.0" layoutY="305.0" prefHeight="2.0" prefWidth="671.0" />
-      <StackedBarChart fx:id="ganttDiagram" layoutX="14.0" layoutY="306.0" prefHeight="332.0" prefWidth="671.0" styleClass="default-color0" stylesheets="@../Styles/styles.css" title="Diagrama de Gantt">
+      <StackedBarChart fx:id="ganttDiagram" layoutX="14.0" layoutY="306.0" legendVisible="false" prefHeight="332.0" prefWidth="671.0" styleClass="default-color0" stylesheets="@../Styles/styles.css" title="Diagrama de Gantt">
         <xAxis>
-          <NumberAxis label="Time" minorTickCount="2" minorTickLength="1.0" minorTickVisible="false" side="BOTTOM" tickLabelFill="WHITE" tickLength="1.0" tickUnit="1.0" />
+          <NumberAxis label="Time" minorTickCount="1" side="BOTTOM" tickLabelFill="WHITE" />
         </xAxis>
         <yAxis>
-          <CategoryAxis label="Process" side="LEFT" tickLabelFill="WHITE" />
+          <CategoryAxis label="Process" prefHeight="223.0" prefWidth="73.0" side="LEFT" tickLabelFill="WHITE" />
         </yAxis>
       </StackedBarChart>
     </children>

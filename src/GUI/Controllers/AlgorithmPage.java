@@ -2,6 +2,7 @@ package GUI.Controllers;
 
 import GUI.GuiUtil;
 import Models.Process;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,30 +61,13 @@ public class AlgorithmPage implements Initializable{
     //Methods
 
     //Method that is responsible for loading the information of the processes in the table
-    public void loadProcessInformation(ObservableList<Process> processes, double averageWaitTime, double averageReturnTime){
+    public void loadProcessInformation(ObservableList<Process> processes, double averageWaitTime, double averageReturnTime, ArrayList<XYChart.Series<Integer, String>> series ){
         this.processTable.setItems(processes);
         this.tfAverageWaitTime.setText(Double.toString(averageWaitTime));
         this.tfAverageReturnTime.setText(Double.toString(averageReturnTime));
 
-        ArrayList<XYChart.Series<Integer, String>> serieses = new ArrayList<>();
-        ArrayList<Process> processesArray = new ArrayList<>(processes);
+        ganttDiagram.getData().setAll(series);
 
-        XYChart.Series<Integer, String> mainSeries = new XYChart.Series<>();
-
-        for(Process currentProcess: processesArray){
-            XYChart.Series<Integer, String> series = new XYChart.Series<>();
-            series.getData().add(new XYChart.Data<>(currentProcess.getReturnTime() - currentProcess.getWaitTime(), currentProcess.getName()));
-            mainSeries.getData().add(new XYChart.Data<>(currentProcess.getWaitTime(), currentProcess.getName()));
-            serieses.add(series);
-        }
-
-        serieses.add(0, mainSeries);
-        ganttDiagram.getData().setAll(serieses);
-        ganttDiagram.setLayoutX(1);
-
-        for(Node n:ganttDiagram.lookupAll(".default-color1.chart-bar")) {
-            n.setStyle("-fx-bar-fill: red;");
-        }
     }
 
     //Method that is responsible for exiting the application

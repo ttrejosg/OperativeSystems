@@ -12,24 +12,9 @@ public class GuiUtil {
     public static double mouseX, mouseY;
     private static Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-
-    public static Scene loadSceneFrom(String fxmlName){
-        try{
-            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./FXML/" + fxmlName + ".fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            scene.setFill(Color.TRANSPARENT);
-            return scene;
-        }catch (Exception e){
-            System.out.println("Scene Loading Error");
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static Scene loadSceneFrom(String fxmlName,Object controller) {
         try {
-            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./FXML/" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./Views/" + fxmlName + ".fxml"));
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -40,12 +25,6 @@ public class GuiUtil {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static Parent loadComponentFrom(String fxmlName){
-
-
-        return null;
     }
 
     public static void setDragAndDropOnStage(Stage stage){

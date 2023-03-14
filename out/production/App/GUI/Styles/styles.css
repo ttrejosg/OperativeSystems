@@ -1,5 +1,4 @@
-.default-color0.chart-bar { -fx-bar-fill: transparent
-}
+.default-color0.chart-bar { -fx-bar-fill: transparent; }
 
 .button2
 {
@@ -96,7 +95,6 @@
     -fx-background-color:derive( #2D75E8,90%);
 	-fx-background-insets: 2, 0, 0;
 	-fx-background-radius: 2em;
-
 }
 
 /* chart properties */

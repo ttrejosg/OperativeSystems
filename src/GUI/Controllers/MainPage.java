@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -105,6 +106,7 @@ public class MainPage implements Initializable {
             this.bottonForm.setOnAction(this::editProcess);
             this.inputName.setText(selectedprocess.getName());
             this.inputRunTime.getValueFactory().setValue(selectedprocess.getRunTime());
+            this.inputPriority.getValueFactory().setValue(selectedprocess.getPriority());
             this.showFormStage(formScene);
         }
         else {
@@ -178,26 +180,29 @@ public class MainPage implements Initializable {
     private void execute(ActionEvent event) {
         String selectedItem = this.comboBox.getSelectionModel().getSelectedItem();
         ArrayList<Process> processes = new ArrayList<>(this.processTable.getItems());
+        ArrayList<XYChart.Series<Integer, String>> series = null;
+
         if(!processes.isEmpty()){
             if(selectedItem == null) GuiUtil.showMessageDialog("Ejecutar Algoritmo", "Debe seleccionar una de las opciones");
             else if(selectedItem.equals("Orden de llegada")){
-                PlanificationAlgorithm.FCFS(processes);
-                showAlgorithmPage(processes);
+                series = PlanificationAlgorithm.FCFS(processes);
+                showAlgorithmPage(processes, series);
             } else if (selectedItem.equals("Primero el más corto")) {
-                PlanificationAlgorithm.SJF(processes);
-                showAlgorithmPage(processes);
+                series = PlanificationAlgorithm.SJF(processes);
+                showAlgorithmPage(processes, series);
             } else if (selectedItem.equals("Prioridad")) {
-                PlanificationAlgorithm.priority(processes);
-                showAlgorithmPage(processes);
+                series = PlanificationAlgorithm.priority(processes);
+                showAlgorithmPage(processes, series);
             } else if (selectedItem.equals("Round Robin")) {
                 int quantum = spinnerQuantum.getValue();
-                showAlgorithmPage(PlanificationAlgorithm.roundRobin(processes, quantum));
+                series = PlanificationAlgorithm.roundRobin(processes, quantum);
+                showAlgorithmPage(processes, series);
             }
         }else GuiUtil.showMessageDialog("Ejecutar Algoritmo","No hay Procesos para ejecutar!");
     }
 
     //Method that is responsible for show the PlanificationAlgorithm Page
-    private void showAlgorithmPage(ArrayList<Process> processes){
+    private void showAlgorithmPage(ArrayList<Process> processes, ArrayList<XYChart.Series<Integer, String>> series){
         AlgorithmPage algorithmPage = new AlgorithmPage();
         Stage stage = (Stage) scenePane.getScene().getWindow();
         stage.setScene(GuiUtil.loadSceneFrom("AlgorithmPage", algorithmPage));
@@ -205,7 +210,7 @@ public class MainPage implements Initializable {
 
         //Calculate the averages
         double averageWaitTime = 0;
-        int averageReturnTime = 0;
+        double averageReturnTime = 0;
         for(Process currentProcess: processes){
             averageWaitTime += currentProcess.getWaitTime();
             averageReturnTime += currentProcess.getReturnTime();
@@ -214,7 +219,7 @@ public class MainPage implements Initializable {
         averageReturnTime /= processes.size();
 
         //Set the information in the page
-        algorithmPage.loadProcessInformation(this.processTable.getItems(), averageWaitTime, averageReturnTime);
+        algorithmPage.loadProcessInformation(this.processTable.getItems(), averageWaitTime, averageReturnTime, series);
         stage.show();
     }
 
