@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlanificationAlgorithm {
 
@@ -47,21 +49,7 @@ public class PlanificationAlgorithm {
      * @param processes The processes
      * @param quantum The corresponding quantum
      */
-    public static ArrayList<Process> roundRobin(ArrayList<Process> processes, int quantum){
-        ArrayList<Process> deltaProcesses = new ArrayList<>();
-        while(!processes.isEmpty()){
-            Process currentProcess = processes.remove(0);
-            Process deltaProcess = new Process(currentProcess);
-            if(currentProcess.getRunTime() > quantum){
-                deltaProcess.setReturnTime(quantum);
-                deltaProcesses.add(deltaProcess);
-                currentProcess.setRunTime(currentProcess.getRunTime()-quantum);
-                processes.add(currentProcess);
-            }else{
-                deltaProcess.setRunTime(currentProcess.getRunTime());
-                deltaProcesses.add(deltaProcess);
-            }
-        }
-        return deltaProcesses;
+    public static void roundRobin(ArrayList<Process> processes, int quantum){
+
     }
 }

@@ -16,21 +16,23 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Pane fx:id="logIn111" layoutX="25.0" layoutY="54.0" prefHeight="222.0" prefWidth="205.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
+      <Pane fx:id="logIn111" layoutX="21.0" layoutY="54.0" prefHeight="230.0" prefWidth="212.0" style="-fx-background-color: #131022; -fx-background-radius: 30;">
          <children>
-            <Button fx:id="bottonForm" layoutX="58.0" layoutY="125.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Crear">
+            <Button fx:id="bottonForm" layoutX="61.0" layoutY="137.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(30, 183, 0);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Crear">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="58.0" layoutY="170.0" mnemonicParsing="false" onAction="#cancelForm" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Cancelar">
+            <Button layoutX="61.0" layoutY="182.0" mnemonicParsing="false" onAction="#cancelForm" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: rgb(196, 0, 0);" styleClass="button2" stylesheets="@../Styles/styles.css" text="Cancelar">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <TextField fx:id="inputName" layoutX="28.0" layoutY="14.0" promptText="Nombre*" styleClass="textField" />
-            <Spinner fx:id="inputRunTime" editable="true" layoutX="28.0" layoutY="56.0" styleClass="button2" />
-            <Spinner fx:id="inputPriority" editable="true" layoutX="28.0" layoutY="88.0" styleClass="button2" />
+            <Spinner fx:id="inputRunTime" editable="true" layoutX="73.0" layoutY="56.0" prefHeight="25.0" prefWidth="104.0" styleClass="button2" />
+            <Spinner fx:id="inputPriority" editable="true" layoutX="73.0" layoutY="88.0" prefHeight="25.0" prefWidth="104.0" styleClass="button2" />
+            <Text fill="WHITE" layoutX="17.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ejecución" />
+            <Text fill="WHITE" layoutX="17.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prioridad" />
          </children>
       </Pane>
     </children>

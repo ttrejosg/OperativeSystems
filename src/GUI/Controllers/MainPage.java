@@ -191,7 +191,8 @@ public class MainPage implements Initializable {
                 showAlgorithmPage(processes);
             } else if (selectedItem.equals("Round Robin")) {
                 int quantum = spinnerQuantum.getValue();
-                showAlgorithmPage(PlanificationAlgorithm.roundRobin(processes, quantum));
+                PlanificationAlgorithm.roundRobin(processes, quantum);
+                showAlgorithmPage(processes);
             }
         }else GuiUtil.showMessageDialog("Ejecutar Algoritmo","No hay Procesos para ejecutar!");
     }

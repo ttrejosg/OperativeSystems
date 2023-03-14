@@ -29,7 +29,7 @@ public class GuiUtil {
 
     public static Scene loadSceneFrom(String fxmlName,Object controller) {
         try {
-            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./FXML/" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(GuiUtil.class.getResource("./Views/" + fxmlName + ".fxml"));
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
